@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@opencode-ai/plugin": "1.4.7",
+    "@tarquinen/opencode-dcp": "^3.1.13",
+    "opencode-snip": "^1.6.1"
+  }
+}

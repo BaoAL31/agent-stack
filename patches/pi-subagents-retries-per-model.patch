@@ -1,0 +1,30 @@
+--- a/src/runs/shared/model-fallback.ts
++++ b/src/runs/shared/model-fallback.ts
+@@ -394,7 +394,26 @@
+ 		seen.add(normalized);
+ 		candidates.push(normalized);
+ 	}
+-	return filterFallbackCandidates(candidates);
++	return expandRetriesPerModel(filterFallbackCandidates(candidates));
++}
++
++/**
++ * Repeat each candidate N times so the model-attempts loop retries the same
++ * model before moving to the next fallback. N comes from the env var
++ * PI_SUBAGENT_RETRIES_PER_MODEL (clamped 1..5, default 1 = off).
++ * Only retryable failures (rate-limit, overload, timeout, ...) advance to the
++ * next entry, so a repeated entry acts as a same-model retry.
++ */
++function expandRetriesPerModel(candidates: string[]): string[] {
++	if (candidates.length === 0) return candidates;
++	const raw = Number.parseInt(process.env.PI_SUBAGENT_RETRIES_PER_MODEL ?? "", 10);
++	if (!Number.isFinite(raw) || raw <= 1) return candidates;
++	const attempts = Math.min(5, raw);
++	const expanded: string[] = [];
++	for (const candidate of candidates) {
++		for (let attempt = 0; attempt < attempts; attempt++) expanded.push(candidate);
++	}
++	return expanded;
+ }
+ 
+ const RETRYABLE_MODEL_FAILURE_PATTERNS = [

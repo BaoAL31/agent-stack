@@ -1,0 +1,48 @@
+// pi-nvidia-nim extension handles all NVIDIA NIM models.
+// See ~/.pi/agent/npm/node_modules/pi-nvidia-nim
+{
+  "providers": {
+    "openrouter": {
+      "models": [
+        {
+          "id": "tencent/hy3:free",
+          "name": "Tencent HY3 (Free)",
+          "contextWindow": 262144,
+          "maxTokens": 8192
+        },
+        {
+          "id": "stealth/ox-alpha",
+          "name": "Stealth Ox Alpha (OpenRouter)",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1048576,
+          "maxTokens": 131072,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": "low",
+            "medium": "high",
+            "high": "high",
+            "xhigh": "max",
+            "max": "max"
+          }
+        }
+      ]
+    },
+    "nvidia-deepseek": {
+      "baseUrl": "https://integrate.api.nvidia.com/v1",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "deepseek-ai/deepseek-v4-flash-0731",
+          "name": "DeepSeek V4 Flash 0731 (NVIDIA NIM)",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 1048576,
+          "maxTokens": 16384,
+          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0}
+        }
+      ]
+    }
+  }
+}

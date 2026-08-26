@@ -1,0 +1,15 @@
+--- a/index.ts
++++ b/index.ts
+@@ -1807,7 +1807,11 @@
+ }
+ 
+ function shouldInjectOpenAIPromptCacheKeyForModel(model: PiModel | undefined): boolean {
+-  return isOpenAICompatibleApi(model?.api);
++  if (!isOpenAICompatibleApi(model?.api)) return false;
++  // NVIDIA NIM (integrate.api.nvidia.com) rejects prompt_cache_key with HTTP 400.
++  const baseUrl = lower(model?.baseUrl ?? "");
++  if (baseUrl.includes("integrate.api.nvidia.com") || baseUrl.includes("api.nvidia.com")) return false;
++  return true;
+ }
+ 
+ function collectAnthropicCacheControlsInWireOrder(payload: unknown): UnknownRecord[] {

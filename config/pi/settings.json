@@ -1,0 +1,85 @@
+{
+  "defaultModel": "ox-alpha-free",
+  "defaultProvider": "opencode-go",
+  "lastChangelogVersion": "0.84.3",
+  "packages": [
+    "npm:@capyup/pi-auto-compact",
+    "npm:pi-rtk-optimizer",
+    "npm:pi-cache-graph",
+    "npm:pi-cache-optimizer",
+    "npm:pi-caveman",
+    "git:github.com/xRyul/pi-nvidia-nim",
+    "npm:pi-web-access",
+    "npm:pi-subagents"
+  ],
+  "defaultThinkingLevel": "low",
+  "theme": "dark",
+  "enabledModels": [
+    "opencode-go/ox-alpha-free",
+    "opencode/hy3-free",
+    "opencode-go/glm-5.2"
+  ],
+  "subagents": {
+    "agentOverrides": {
+      "delegate": {
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fallbackModels": [
+          "openrouter/nvidia/nemotron-3.5-lightning:free",
+          "opencode/nemotron-3.5-lightning-free",
+          "opencode/mimo-v2.5-free",
+          "opencode/hy3-free"
+        ]
+      },
+      "scout": {
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "fallbackModels": [
+          "openrouter/nvidia/nemotron-3.5-lightning:free",
+          "opencode/nemotron-3.5-lightning-free",
+          "opencode/mimo-v2.5-free",
+          "opencode/hy3-free"
+        ]
+      },
+      "oracle": {
+        "model": "opencode-go/ox-alpha-free",
+        "fallbackModels": [
+          "openrouter/stealth/ox-alpha",
+          "nvidia/minimaxai/minimax-m3",
+          "nvidia/nemotron-3-ultra-550b-a55b",
+          "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "opencode/nemotron-3-ultra-free",
+          "nvidia/nemotron-3-super-120b-a12b"
+        ]
+      },
+      "worker": {
+        "model": "opencode-go/ox-alpha-free",
+        "fallbackModels": [
+          "openrouter/stealth/ox-alpha",
+          "nvidia/minimaxai/minimax-m3",
+          "nvidia/nemotron-3-ultra-550b-a55b",
+          "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "opencode/nemotron-3-ultra-free",
+          "nvidia/nemotron-3-super-120b-a12b"
+        ]
+      },
+      "reviewer": {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "fallbackModels": [
+          "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "opencode/nemotron-3-ultra-free",
+          "opencode-go/ox-alpha-free",
+          "openrouter/stealth/ox-alpha",
+          "nvidia/minimaxai/minimax-m3"
+        ]
+      },
+      "researcher": {
+        "model": "nvidia/nemotron-3-ultra-550b-a55b",
+        "fallbackModels": [
+          "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "opencode/nemotron-3-ultra-free",
+          "opencode-go/ox-alpha-free",
+          "opencode/muse-spark-1.2-contributor-free"
+        ]
+      }
+    }
+  }
+}
