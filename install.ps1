@@ -47,14 +47,23 @@ if (-not (Test-Path package.json)) { Write-Error "~/.pi/agent/npm/package.json m
 npm install --legacy-peer-deps --no-audit --no-fund
 Pop-Location
 
-# 5. patches
+# 5. patches (see patches/README.md for status)
 $nm = "$HOME\.pi\agent\npm\node_modules"
-git apply --check -p0 "$PSScriptRoot\patches\pi-cache-optimizer-nvidia-cachekey.patch" --directory="$nm/pi-cache-optimizer"
-git apply -p0 "$PSScriptRoot\patches\pi-cache-optimizer-nvidia-cachekey.patch" --directory="$nm/pi-cache-optimizer"
-Write-Host "  patched: pi-cache-optimizer (nvidia cache-key)"
-git apply --check -p0 "$PSScriptRoot\patches\pi-subagents-retries-per-model.patch" --directory="$nm/pi-subagents"
-git apply -p0 "$PSScriptRoot\patches\pi-subagents-retries-per-model.patch" --directory="$nm/pi-subagents"
-Write-Host "  patched: pi-subagents (retries per model)"
+# pi-cache-optimizer code patch is SUPERSEDED on >=2.8.10 by
+# config/pi/pi-cache-optimizer-config.json (promptCacheKey.omit, copied in step 1).
+# Apply the old code patch only on <2.8.10 without the omit config.
+$omitCfg = "$HOME\.pi\agent\pi-cache-optimizer-config.json"
+$coVer = try { [version]((Get-Content "$nm\pi-cache-optimizer\package.json" -Raw | ConvertFrom-Json).version) } catch { $null }
+if (($coVer -ne $null) -and ($coVer -lt [version]"2.8.10") -and (-not (Test-Path $omitCfg))) {
+    git apply --check -p0 "$PSScriptRoot\patches\pi-cache-optimizer-nvidia-cachekey.patch" --directory="$nm/pi-cache-optimizer"
+    git apply -p0 "$PSScriptRoot\patches\pi-cache-optimizer-nvidia-cachekey.patch" --directory="$nm/pi-cache-optimizer"
+    Write-Host "  patched: pi-cache-optimizer (nvidia cache-key)"
+} else {
+    Write-Host "  skip pi-cache-optimizer code patch (native omit config covers >=2.8.10)" -ForegroundColor DarkGray
+}
+# pi-subagents retries patch is RETIRED: upstream 0.68.0 removed fallbackModels
+# and all same-launch model switching, so there is nothing to patch against.
+Write-Host "  skip pi-subagents patch (retired upstream, see patches/README.md)" -ForegroundColor DarkGray
 
 # 6. retries env var
 [Environment]::SetEnvironmentVariable("PI_SUBAGENT_RETRIES_PER_MODEL", "3", "User")
