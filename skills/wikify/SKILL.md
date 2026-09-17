@@ -1,6 +1,6 @@
 ---
 name: wikify
-description: Generate a Karpathy-style wiki from a thesis, report, paper, or project. Extracts papers, methods, concepts, and techniques into organized, cross-referenced wiki articles. Trigger: "generate wiki", "create wiki", "wiki of this", "/wikify"
+description: "Generate a Karpathy-style wiki from a thesis, report, paper, or project. Extracts papers, methods, concepts, and techniques into organized, cross-referenced wiki articles. Trigger: generate wiki, create wiki, wiki of this, /wikify"
 ---
 
 # /wikify — Knowledge Wiki Generator
