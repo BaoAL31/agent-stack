@@ -1,5 +1,5 @@
 diff --git a/index.ts b/index.ts
-index cd56361..1037dc5 100644
+index cd56361..815ef90 100644
 --- a/index.ts
 +++ b/index.ts
 @@ -129,6 +129,14 @@ const THINKING_CONFIGS: Record<string, ThinkingConfig> = {
@@ -21,8 +21,8 @@ index cd56361..1037dc5 100644
  	// Z-AI / GLM
  	"z-ai/glm4.7": 131072,
  	"z-ai/glm5": 131072,
-+	"z-ai/glm-5.3": 131072,
-+	"z-ai/glm-5.3-flash": 131072,
++	"z-ai/glm-5.3": 1048576,
++	"z-ai/glm-5.3-flash": 1048576,
  	// StepFun
  	"stepfun-ai/step-3.5-flash": 131072,
  	// ByteDance
@@ -30,8 +30,8 @@ index cd56361..1037dc5 100644
  	"meta/llama-4-scout-17b-16e-instruct": 16384,
  	"z-ai/glm4.7": 16384,
  	"z-ai/glm5": 16384,
-+	"z-ai/glm-5.3": 16384,
-+	"z-ai/glm-5.3-flash": 16384,
++	"z-ai/glm-5.3": 131072,
++	"z-ai/glm-5.3-flash": 131072,
  	"qwen/qwen3-coder-480b-a35b-instruct": 65536,
  	"nvidia/llama-3.1-nemotron-ultra-253b-v1": 32768,
  	"openai/gpt-oss-120b": 16384,
