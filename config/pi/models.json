@@ -1,5 +1,7 @@
 // pi-nvidia-nim extension handles all NVIDIA NIM models.
-// See ~/.pi/agent/npm/node_modules/pi-nvidia-nim
+// Loaded as a git package: ~/.pi/agent/git/github.com/xRyul/pi-nvidia-nim
+// (deepseek-r1/v3/v4, GLM-5.3, Kimi, Qwen, Llama and 70+ more are served
+//  by that extension under provider "nvidia-nim" — no models.json block needed.)
 {
   "providers": {
     "openrouter": {
@@ -26,21 +28,6 @@
             "xhigh": "max",
             "max": "max"
           }
-        }
-      ]
-    },
-    "nvidia-deepseek": {
-      "baseUrl": "https://integrate.api.nvidia.com/v1",
-      "api": "openai-completions",
-      "models": [
-        {
-          "id": "deepseek-ai/deepseek-v4-flash-0731",
-          "name": "DeepSeek V4 Flash 0731 (NVIDIA NIM)",
-          "reasoning": true,
-          "input": ["text"],
-          "contextWindow": 1048576,
-          "maxTokens": 16384,
-          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0}
         }
       ]
     }

@@ -64,6 +64,19 @@ if (($coVer -ne $null) -and ($coVer -lt [version]"2.8.10") -and (-not (Test-Path
 # pi-subagents retries patch is RETIRED: upstream 0.68.0 removed fallbackModels
 # and all same-launch model switching, so there is nothing to patch against.
 Write-Host "  skip pi-subagents patch (retired upstream, see patches/README.md)" -ForegroundColor DarkGray
+# pi-nvidia-nim glm catalog patch (git package — reapply after `pi update`)
+$nimDir = "$HOME\.pi\agent\git\github.com\xRyul\pi-nvidia-nim"
+if ((Test-Path "$nimDir\.git") -and (Get-Command git -ErrorAction SilentlyContinue)) {
+    git -C $nimDir apply --check "$PSScriptRoot\patches\pi-nvidia-nim-glm53-catalog.patch" 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        git -C $nimDir apply "$PSScriptRoot\patches\pi-nvidia-nim-glm53-catalog.patch"
+        Write-Host "  patched: pi-nvidia-nim (glm-5.3 catalog)"
+    } else {
+        Write-Host "  patch skipped (already applied or version drift): pi-nvidia-nim" -ForegroundColor DarkGray
+    }
+} else {
+    Write-Host "  skip pi-nvidia-nim patch (extension not installed or git missing)" -ForegroundColor DarkGray
+}
 
 # 6. retries env var
 [Environment]::SetEnvironmentVariable("PI_SUBAGENT_RETRIES_PER_MODEL", "3", "User")

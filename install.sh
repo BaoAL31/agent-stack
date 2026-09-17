@@ -120,6 +120,19 @@ else
     echo "  SKIP patches: git not installed (sudo pacman -S --needed git)"
 fi
 
+# 5b. git-package patches (reapply after `pi update`)
+NIM_DIR="$HOME/.pi/agent/git/github.com/xRyul/pi-nvidia-nim"
+if [ -d "$NIM_DIR/.git" ] && command -v git >/dev/null 2>&1; then
+    if git -C "$NIM_DIR" apply --check "$REPO/patches/pi-nvidia-nim-glm53-catalog.patch" 2>/dev/null; then
+        git -C "$NIM_DIR" apply "$REPO/patches/pi-nvidia-nim-glm53-catalog.patch"
+        echo "  patched: pi-nvidia-nim (glm-5.3 catalog)"
+    else
+        echo "  patch skipped (already applied or version drift): pi-nvidia-nim"
+    fi
+else
+    echo "  skip pi-nvidia-nim patch (extension not installed or git missing)"
+fi
+
 # 6. retries env var (shell + login shell; Hyprland GUI apps need hl.env, see note)
 for rc in "$HOME/.bashrc" "$HOME/.profile"; do
     [ -f "$rc" ] || continue

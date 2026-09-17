@@ -1,0 +1,46 @@
+diff --git a/index.ts b/index.ts
+index cd56361..1037dc5 100644
+--- a/index.ts
++++ b/index.ts
+@@ -129,6 +129,14 @@ const THINKING_CONFIGS: Record<string, ThinkingConfig> = {
+ 		enableKwargs: { enable_thinking: true, clear_thinking: false },
+ 		disableKwargs: { enable_thinking: false },
+ 	},
++	"z-ai/glm-5.3": {
++		enableKwargs: { enable_thinking: true, clear_thinking: false },
++		disableKwargs: { enable_thinking: false },
++	},
++	"z-ai/glm-5.3-flash": {
++		enableKwargs: { enable_thinking: true, clear_thinking: false },
++		disableKwargs: { enable_thinking: false },
++	},
+ 	// Kimi models: chat_template_kwargs works, reasoning_effort also works
+ 	"moonshotai/kimi-k2.6": {
+ 		enableKwargs: { thinking: true },
+@@ -355,6 +363,8 @@ const CONTEXT_WINDOWS: Record<string, number> = {
+ 	// Z-AI / GLM
+ 	"z-ai/glm4.7": 131072,
+ 	"z-ai/glm5": 131072,
++	"z-ai/glm-5.3": 131072,
++	"z-ai/glm-5.3-flash": 131072,
+ 	// StepFun
+ 	"stepfun-ai/step-3.5-flash": 131072,
+ 	// ByteDance
+@@ -411,6 +421,8 @@ const MAX_TOKENS: Record<string, number> = {
+ 	"meta/llama-4-scout-17b-16e-instruct": 16384,
+ 	"z-ai/glm4.7": 16384,
+ 	"z-ai/glm5": 16384,
++	"z-ai/glm-5.3": 16384,
++	"z-ai/glm-5.3-flash": 16384,
+ 	"qwen/qwen3-coder-480b-a35b-instruct": 65536,
+ 	"nvidia/llama-3.1-nemotron-ultra-253b-v1": 32768,
+ 	"openai/gpt-oss-120b": 16384,
+@@ -440,6 +452,8 @@ const FEATURED_MODELS = [
+ 	"minimaxai/minimax-m2",
+ 	"minimaxai/minimax-m2.7",
+ 	"z-ai/glm5",
++	"z-ai/glm-5.3",
++	"z-ai/glm-5.3-flash",
+ 	"z-ai/glm4.7",
+ 	"openai/gpt-oss-120b",
+ 	"openai/gpt-oss-20b",
