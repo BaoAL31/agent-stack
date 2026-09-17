@@ -2,6 +2,9 @@
   "version": 2,
   "promptCacheKey": {
     "omit": [
+      "nvidia-nim/nvidia/nemotron-3-super-120b-a12b",
+      "nvidia-nim/nvidia/nemotron-3-ultra-550b-a55b",
+      "nvidia-nim/nvidia/nemotron-3.5-lightning-30b-a3b",
       "nvidia-nim/z-ai/glm-5.3",
       "nvidia-nim/z-ai/glm-5.3-flash",
       "nvidia/nvidia/minimaxai/minimax-m3",
